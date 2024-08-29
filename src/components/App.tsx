@@ -6,18 +6,22 @@ import ErrorMessage from "./ErrorMessage/ErrorMessage";
 import LoadMoreBtn from "./LoadMoreBtn/LoadMoreBtn";
 import ImageModal from "./ImageModal/ImageModal";
 import getImages from "../api";
+import { Image, TargetImage } from "../types";
 
-export default function App() {
+export default function App(): JSX.Element {
   const [page, setPage] = useState(0);
   const [searchQuery, setSearchQuery] = useState("");
-  const [images, setImages] = useState([]);
+  const [images, setImages] = useState<Image[]>([]);
   const [error, setError] = useState(false);
   const [isLoad, setIsLoad] = useState(false);
   const [modalIsOpen, setModalIsOpen] = useState(false);
-  const [targetImage, setTargetImage] = useState({ src: "", alt: "" });
+  const [targetImage, setTargetImage] = useState<TargetImage>({
+    src: "",
+    alt: "",
+  });
   const [errorMessage, setErrorMessage] = useState("Ooops! Please reload!");
 
-  const openModal = ({ src, alt }) => {
+  const openModal = ({ src, alt }: TargetImage) => {
     setTargetImage({ src, alt });
     setModalIsOpen(true);
   };
@@ -27,7 +31,7 @@ export default function App() {
     setTargetImage({ src: "", alt: "" });
   };
 
-  const setSearch = (query) => {
+  const setSearch = (query: string) => {
     setSearchQuery(query);
     setPage(1);
     setImages([]);
@@ -52,7 +56,7 @@ export default function App() {
         }
         setErrorMessage("Ooops! Please reload!");
 
-        setImages((prevImages) => {
+        setImages((prevImages: Image[]) => {
           return [...prevImages, ...images];
         });
       } catch (e) {
@@ -64,6 +68,8 @@ export default function App() {
 
     newImages();
   }, [page, searchQuery]);
+
+  console.log(images);
 
   const addPage = () => {
     setPage(page + 1);

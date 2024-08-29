@@ -1,15 +1,25 @@
 import ImageCard from "./ImageCard/ImageCard";
 import css from "./ImageGallery.module.css";
+import { Image, TargetImage } from "../../types";
 
-export default function ImageGallery({ images, onTarget }) {
-  const targetImage = (e) => {
-    const targetElement = e.target;
+type ImageGalleryProps = {
+  images: Image[];
+  onTarget: ({ src, alt }: TargetImage) => void;
+};
+
+export default function ImageGallery({
+  images,
+  onTarget,
+}: ImageGalleryProps): JSX.Element {
+  const targetImage = (e: React.MouseEvent<HTMLUListElement>) => {
+    const targetElement = e.target as HTMLImageElement;
     if (targetElement.tagName !== "IMG") {
       return;
     }
+
     onTarget({
-      src: targetElement.dataset.modal,
-      alt: targetElement.alt,
+      src: targetElement.dataset.modal || "",
+      alt: targetElement.alt || "",
     });
   };
 

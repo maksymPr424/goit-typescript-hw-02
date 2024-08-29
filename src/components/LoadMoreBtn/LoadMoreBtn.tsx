@@ -1,6 +1,12 @@
 import css from "./LoadMoreBtn.module.css";
 
-export default function LoadMoreBtn({ onAddPage }) {
+type LoadMoreBtnProps = {
+  onAddPage: () => void;
+};
+
+export default function LoadMoreBtn({
+  onAddPage,
+}: LoadMoreBtnProps): JSX.Element {
   return (
     <button className={css.loadMore} onClick={onAddPage}>
       Load more

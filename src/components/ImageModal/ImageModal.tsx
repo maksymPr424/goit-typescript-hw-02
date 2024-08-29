@@ -3,7 +3,22 @@ import css from "./ImageModal.module.css";
 
 Modal.setAppElement("#root");
 
-export default function ImageModal({ isOpen, onRequestClose, imgInfo }) {
+type TargetImage = {
+  src: string;
+  alt: string;
+};
+
+type ImageModalProps = {
+  isOpen: boolean;
+  onRequestClose: () => void;
+  imgInfo: TargetImage;
+};
+
+export default function ImageModal({
+  isOpen,
+  onRequestClose,
+  imgInfo,
+}: ImageModalProps): JSX.Element {
   const { src, alt } = imgInfo;
   return (
     <Modal
@@ -35,7 +50,10 @@ export default function ImageModal({ isOpen, onRequestClose, imgInfo }) {
         onClick={onRequestClose}
         src={src}
         alt={alt}
-        style={{ width: "100%", height: "100%" }}
+        style={{
+          objectFit: "contain",
+          objectPosition: "center",
+        }}
       />
     </Modal>
   );
