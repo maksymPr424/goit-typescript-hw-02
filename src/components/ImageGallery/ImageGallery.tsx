@@ -11,7 +11,7 @@ export default function ImageGallery({
   images,
   onTarget,
 }: ImageGalleryProps): JSX.Element {
-  const targetImage = (e: React.MouseEvent<HTMLUListElement>) => {
+  const targetImage = (e: React.MouseEvent<HTMLUListElement>): void => {
     const targetElement = e.target as HTMLImageElement;
     if (targetElement.tagName !== "IMG") {
       return;

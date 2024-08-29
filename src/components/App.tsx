@@ -21,17 +21,17 @@ export default function App(): JSX.Element {
   });
   const [errorMessage, setErrorMessage] = useState("Ooops! Please reload!");
 
-  const openModal = ({ src, alt }: TargetImage) => {
+  const openModal = ({ src, alt }: TargetImage): void => {
     setTargetImage({ src, alt });
     setModalIsOpen(true);
   };
 
-  const closeModal = () => {
+  const closeModal = (): void => {
     setModalIsOpen(false);
     setTargetImage({ src: "", alt: "" });
   };
 
-  const setSearch = (query: string) => {
+  const setSearch = (query: string): void => {
     setSearchQuery(query);
     setPage(1);
     setImages([]);
@@ -42,7 +42,7 @@ export default function App(): JSX.Element {
       return;
     }
 
-    const newImages = async () => {
+    const newImages = async (): Promise<void> => {
       try {
         setIsLoad(true);
         setError(false);
@@ -71,7 +71,7 @@ export default function App(): JSX.Element {
 
   console.log(images);
 
-  const addPage = () => {
+  const addPage = (): void => {
     setPage(page + 1);
   };
   return (
